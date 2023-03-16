@@ -14,6 +14,7 @@ function get() {
 }
 
 function getById(id) {
+  console.log(`${id}`);
   return db("users").where({ id }).first();
 }
 

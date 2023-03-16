@@ -27,6 +27,7 @@ router.get("/:id", validateUserId, async (req, res, next) => {
   // RETURN THE USER OBJECT
   // this needs a middleware to verify user id
   try {
+    console.log("test");
     res.json(req.user);
   } catch (err) {
     res.status(500).json({ message: "We ran into an error!" });
