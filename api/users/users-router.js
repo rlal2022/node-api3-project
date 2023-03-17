@@ -27,7 +27,7 @@ router.get("/:id", validateUserId, async (req, res, next) => {
   // RETURN THE USER OBJECT
   // this needs a middleware to verify user id
   try {
-    res.json(req.user);
+    res.status(200).json(req.user);
   } catch (err) {
     res.status(500).json({ message: "We ran into an error!" });
   }
@@ -45,12 +45,12 @@ router.post("/", validateUser, async (req, res, next) => {
     });
 });
 
-router.put("/:id", validateUserId, validateUser, (req, res, next) => {
+router.put("/:id", validateUserId, validateUser, async (req, res, next) => {
   // RETURN THE FRESHLY UPDATED USER OBJECT
   // this needs a middleware to verify user id
   // and another middleware to check that the request body is valid
   try {
-    const updateUsers = Users.update(req.params.id, req.body);
+    const updateUsers = await Users.update(req.params.id, req.body);
     res.status(200).json(updateUsers);
   } catch (err) {
     next(err);
